@@ -1,0 +1,157 @@
+<html>
+
+<head>
+    <title>Home</title>
+
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btListaTodos").click(function () {
+                var url = "/ecommerce/" + $("#pagina").val();
+                $.get(url, function (data, status) {
+                    $("#lista").text("");
+
+                    for (i = 0; i < data.length; i++) {
+                        var produto = data [i];
+
+                        $("#lista").append("ID " + produto.id);
+                        $("#lista").append(" - ");
+                        $("#lista").append("Nome: " + produto.nome);
+                        $("#lista").append(" - ");
+                        $("#lista").append("Data de criação: " + produto.dataCriacao);
+                        $("#lista").append(" - ");
+                        $("#lista").append("Valor: " + produto.valor);
+                        $("#lista").append(" - ");
+                        $("#lista").append("Estoque: " + produto.estoque);
+                        $("#lista").append("<br />");
+                    }
+                });
+            });
+
+            $("#btLista").click(function () {
+                var url = "/ecommerce/produto/" + $("#id").val();
+
+                $.get(url, function (data, status) {
+
+                    $("#produto").text("");
+                    var produto = data;
+
+                    if (produto !== null && produto !== "") {
+                        var jsonString = JSON.stringify(produto);
+
+                        $('#produto-img img').attr("src",produto.imagem);
+
+                        $("#produto").append(jsonString);
+                        $("#produto").append("<br/>");
+                    } else {
+                        alert("Produto não encontado")
+                    }
+                });
+            });
+
+            $("#btListaNome").click(function () {
+                var url = "/ecommerce/produtos" + "?nome=" + $("#nome").val();
+
+                $.get(url, function (data, status) {
+                    $("#produtoNome").text("");
+
+
+                    for (i = 0; i < data.length; i++) {
+                        var produto = data [i];
+
+                        $("#produtoNome").append("ID " + produto.id);
+                        $("#produtoNome").append(" - ");
+                        $("#produtoNome").append("Nome: " + produto.nome);
+                        $("#produtoNome").append(" - ");
+                        $("#produtoNome").append("Data de criação: " + produto.dataCriacao);
+                        $("#produtoNome").append(" - ");
+                        $("#produtoNome").append("Valor: " + produto.valor);
+                        $("#produtoNome").append(" - ");
+                        $("#produtoNome").append("Estoque: " + produto.estoque);
+                        $("#produtoNome").append("<br/>");
+                        $("#produtoNome").append("<img width='100px' src='" + produto.imagem + "'/>");
+                        $("#produtoNome").append("<br/>");
+                    }
+                });
+            });
+
+            $("#btCadastro").click(function () {
+
+                $.post("/ecommerce", {
+
+                    nome: $("#txt_nome").val(),
+                    dataCriacao: $("#dt_criacao").val(),
+                    valor: $("#valor").val(),
+                    estoque: $("#estoque").val(),
+                    imagem: $("#imagem_url").val()
+
+                }, function (data, status) {
+                    alert("Produto cadastrado!");
+                });
+
+            });
+
+        })
+        ;
+    </script>
+
+
+</head>
+
+
+<body>
+<h1>Ecommerce dos Guris:</h1>
+
+<h2>Cadastre um Produto</h2>
+<div>
+    <ol>
+        <p>Nome</p>
+        <input id="txt_nome" type="text"/>
+        <p>Data</p>
+        <input id="dt_criacao" type="date"/>
+        <p>Valor</p>
+        <input id="valor" type="number"/>
+        <p>Estoque</p>
+        <input id="estoque" type="number"/>
+        <p>Imagem</p>
+        <input id="imagem_url" type="url"/>
+    </ol>
+
+    <button id="btCadastro">Cadastrar</button>
+</div>
+
+<hr/>
+<div>
+    <h2 id="busca_produto">Buscar um produto:</h2>
+    <p id="prod-id">Digite o id do produto:</p>
+    <input id="id" type="number"/>
+
+    <button id="btLista">Buscar produto</button>
+    <p id="produto"></p>
+</div>
+
+<hr/>
+<div>
+    <h2 id="busca_nome">Buscar um produto por nome:</h2>
+    <p id="prod-nome">Digite o nome do produto:</p>
+    <input id="nome" type="text"/>
+    <button id="btListaNome">Buscar por nome</button>
+    <p id="produtoNome"></p>
+    <img id="produto_img" src="" />
+
+
+</div>
+
+<hr/>
+<div>
+    <h2 id="prd_disp">Produtos disponíveis:</h2>
+    <input id="pagina" type="text"/>
+    <button id="btListaTodos">Listar os Produtos</button>
+    <p id="lista"></p>
+</div>
+
+</body>
+
+</html>
