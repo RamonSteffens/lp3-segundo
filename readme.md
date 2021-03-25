@@ -1,20 +1,7 @@
-Tema: Ecommerce
-Produto:
-{
-"id": Integer,
-"data_criacao": Date,
-"nome": String,
-"valor": BigDecimal,
-"estoque": Integer,
-"ativo": Boolean
-}
+Tema: Ecommerce - Produtos em geral (Alimentos, eletronicos, roupas...) 
 
-Repository<Produto, Long>:
+Para acessar a documentação do projeto (Swagger):
 
-Optional<Produto> findById(Long id);
-List<Produto> findByNome(String nome);
+Rode o projeto local -> Run na classe main
 
-POST - Cadastrar um produto
-GET - Buscar um produto por um ID
-GET (ALL) - Buscar todos os produtos
-GET (NOME) - Buscar produtos pelo nome
+Acesse: http://localhost:8080/swagger-ui.html#/ 
