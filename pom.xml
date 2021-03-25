@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.ifsul</groupId>
-	<artifactId>lp3_4k_web</artifactId>
+	<artifactId>trabalho_lp3_ramon_luan</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>lp3_4k_web</name>
-	<description>Testando a conexão com o banco de dados</description>
+	<name>trabalho_lp3_ramon_luan</name>
+	<description>Trabalho - LP3 -- Ramon_Luan</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -42,6 +42,19 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
